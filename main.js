@@ -1,3 +1,24 @@
+//setting up variables
+const welcome = document.getElementById("welcome-text")
+const startButton = document.getElementById("start-button")
+const quizBox = document.getElementById("quiz-box")
+const results = document.getElementById("results")
+
+let statCorrectAnswers = document.getElementById("correct")
+let statQuestionsAnswered = document.getElementById("questions-answered")
+
+//event listeners for the buttons
+
+startButton.addEventListener('click', startGame)
+
+//what happens when you press start
+function startGame () {
+  startButton.classList.add('hide')
+  welcome.classList.add('hide')
+  quizBox.classList.remove('hide')
+
+}
+
 const questionList = [
   (questionOne = {
     question:
@@ -70,40 +91,44 @@ const questionList = [
 console.log(questionList[0].answers[3].correct);
 
 function loadQuestion(i) {
-  return questionList[i];
+ return questionList[i];
 }
 
-function displayQuestion(questionIndex) {
-  document.getElementById("question").innerText =
-    questionList[questionIndex].question;
-  document.getElementById("answer1").innerText =
-    questionList[questionIndex].answers[0].content;
-  document.getElementById("answer2").innerText =
-    questionList[questionIndex].answers[1].content;
-  document.getElementById("answer3").innerText =
-    questionList[questionIndex].answers[2].content;
-  document.getElementById("answer4").innerText =
-    questionList[questionIndex].answers[3].content;
+function showQuestion() {
+  const questionText = document.getElementById("question-text");
+  questionText.textContent = questionList[currentQuestion].question;
+
+  const choices = document.querySelectorAll(".choice");
+  choices.forEach((choice, index) => {
+    choice.textContent = questionList[currentQuestion].choices[index];
+  });
+
 }
 
-displayQuestion(2);
+function checkAnswer(selected) {
+  const feedback = document.getElementById("feedback");
+  
 
-function validateAnswer() {
-  let correct = questionList[0].answers[2].correct;
-  if ((correct = false)) {
-    return false;
+  if (selected === questionList[currentQuestion].answers.find(answer => answer.correct).content) {
+    feedback.innerText = "Correct!";
+    correctAnswers++;
+    quizBox.style.backgroundColor = "green";
+  } else {
+    feedback.innerText = "Incorrect!";
+    quizBox.style.backgroundColor = "red";
   }
-  if ((correct = true)) {
-    return true;
-  }
-  return correct;
+
+  setTimeout(() => {
+    currentQuestion++;
+    quizBox.style.backgroundColor = "white";
+
+    if (currentQuestion < questions.length) {
+      showQuestion();
+    } else {
+      const quizContainer = document.querySelector(".quiz-container");
+      quizContainer.innerHTML = `<p>You got ${correctAnswers} out of ${questions.length} question.</p>`;
+    }
+  }, 2000);
 }
 
-validateAnswer(0);
-console.log(correct + "if it is correct");
-
-function revealAnswer() {}
-
-function nextQuestion() {}
-
-// console.log(questionList[questionIndex].answers[1].content);
+showQuestion();

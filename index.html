@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Javascript Quiz</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,21 +18,35 @@
 
 <body>
     <div class="main-container">
-        <div class="quiz-box">
+        <div id="welcome-text" class="container1">
+            <div class="text">
+              <h1 id="welcome-heading">Welcome to the Javascript Beginner's Quiz.</h1>
+              <img src="javascript-logo.png"/>
+              <h2>This quiz will test your knowledge of the topics covered in the CFG Javascript Class.</h2>
+              <h3>Click the start button to begin.</h3>
+            </div>
+            <button id="start-button" class="controls">START</button>
+        </div>
+        <div id="quiz-box" class="hide">
             <h1 class="title">QUIZ</h1>
             <div class="separator"></div>
-            <p id="question">What method is used to select all elements with the class "nested" inside an element with
-                the
-                ID "parent"?</p>
-
-            <button id="answer1">document.getElements('.nested', '#parent')</button>
-            <button id="answer2">document.getElementById("parent").getElementsByClassName("nested")</button>
-            <button id="answer3">document.select('.nested', '#parent')</button>
-            <button id="answer4">document.getElementById('parent').find('.nested')</button>
-
-            <button id="button">NEXT</button>
-        </div>
-    </div>
+            <p id="question-text">How can you select an element with the ID "myElement" in JavaScript?</p>
+            <div class="choices">
+                <button class="choice btn" onclick="checkAnswer(0)">"getElement('myElement')"</button>
+                <button class="choice btn" onclick="checkAnswer(1)">"document.getElementByName('myElement')"</button>
+                <button class="choice btn" onclick="checkAnswer(2)">document.getElementById('myElement')"</button>
+                <button class="choice btn" onclick="checkAnswer(3)">selectElement('myElement')</button>
+            </div>
+            <p id="feedback">Feedback</p>
+            <div id="results">
+                <h2 class="title">Results</h2>
+                <span class="stat">Number of Correct Answers: <strong><span id="correct">0</span></strong></span>
+                <span class="stat">  Number of Questions Answered: <strong><span id="questions-answered">0</span></strong></span>
+            </div>
+        </div>    
+    </div> 
+    
+   
     <script src="main.js"></script>
 </body>
 
